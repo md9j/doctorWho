@@ -1,0 +1,85 @@
+CREATE TABLE public.actors (
+    id integer NOT NULL,
+    name text NOT NULL,
+    gender text
+);
+
+CREATE TABLE public.companions (
+    id integer NOT NULL,
+    name text,
+    actor integer
+);
+
+CREATE TABLE public.directors (
+    id integer NOT NULL,
+    name text NOT NULL
+);
+
+CREATE TABLE public.doctors (
+    id integer NOT NULL,
+    incarnation text NOT NULL,
+    primary_actor integer NOT NULL
+);
+
+CREATE TABLE public.episodes (
+    id integer NOT NULL,
+    title text NOT NULL,
+    serial_id integer NOT NULL,
+    story text,
+    episode_order text NOT NULL,
+    original_air_date text NOT NULL,
+    runtime text,
+    uk_viewers_mm numeric,
+    appreciation_index integer,
+    missing integer DEFAULT 0,
+    recreated integer DEFAULT 0
+);
+
+CREATE TABLE public.seasons (
+    id integer NOT NULL,
+    name text NOT NULL
+);
+
+CREATE TABLE public.serials (
+    id integer NOT NULL,
+    season_id integer NOT NULL,
+    story text,
+    serial integer,
+    title text NOT NULL,
+    production_code text
+);
+
+CREATE TABLE public.serials_companions (
+    serial_id integer NOT NULL,
+    companion_id integer NOT NULL
+);
+
+CREATE TABLE public.serials_directors (
+    serial_id integer NOT NULL,
+    director_id integer NOT NULL
+);
+
+CREATE TABLE public.serials_doctors (
+    serial_id integer NOT NULL,
+    doctor_id integer NOT NULL
+);
+
+CREATE TABLE public.serials_writers (
+    serial_id integer NOT NULL,
+    writer_id integer NOT NULL
+);
+
+CREATE TABLE public.writers (
+    id integer NOT NULL,
+    name text NOT NULL
+);
+
+
+*************************************************
+
+SELECT DISTINCT c.name AS companion_name
+FROM public.companions c
+JOIN public.serials_companions sc ON c.id = sc.companion_id
+JOIN public.serials s ON sc.serial_id = s.id
+JOIN public.serials_doctors sd ON s.id = sd.serial_id
+WHERE sd.doctor_id = <doctor_id>;

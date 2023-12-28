@@ -1,0 +1,22 @@
+doctor_who_DB_SQL
+
+
+rearange columns:
+
+-- Rename the original table
+ALTER TABLE original_table RENAME TO original_table_temp;
+
+-- Create a new table with the desired column order
+CREATE TABLE original_table (
+ column3 TEXT,
+ column1 TEXT,
+ column2 TEXT
+);
+
+-- Copy the data from the original table to the new table
+INSERT INTO original_table (column1, column2, column3)
+SELECT column1, column2, column3
+FROM original_table_temp;
+
+-- Drop the temporary table
+DROP TABLE original_table_temp;

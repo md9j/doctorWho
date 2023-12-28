@@ -1,0 +1,64 @@
+<!-- Include the header partial -->
+<%- include("partials/header.ejs") %>
+
+  <span class="title"><h1>Doctor Who</h1><h3 class="title-sm">(dabase)</h3></span>
+
+  <!-- list out each incarnation from the doctor_who database response -->
+  <% data.rows.forEach(function(doc, index){ %>
+    <h2 id="doc<%= index %>" style="display: none;"><%= doc.actor_name %>, the <%= doc.incarnation %></h2>
+    <!-- add area for image of each doctor, add new table to db -->
+  <% }) %>
+
+  <img src="images/actors/12thDoctorTestImage.jpg" class="actor-img"  alt=", the ">
+
+  <p>Information available is pre-60th-anniversary specials.<br>Updates to occur futher into your linear future</p>
+
+  <!-- dropdown with each doc.incarnation as a selectable option -->
+  <form action="/doctorInfo" method="post">
+    <select id="docDropdown" name="selectedDoctor" onchange="changeDoc()">
+      <% data.rows.forEach(function(doc, index){ %>
+        <option value="<%= doc.doctor_id %>"><%= doc.incarnation %>, <%= doc.actor_name %></option>
+      <% }) %>
+    </select>
+    <button type="submit">Search</button>
+  </form>
+
+
+<!-- scripts -->
+
+  <script>
+    // Get the total number of 'doc' elements
+    var totalDocs = <%= data.rows.length %>;
+
+
+    // Set the initial index to 0
+    let currentIndex = 0;
+
+    // Function to display the current 'doc' and move to the next one
+    function displayNextDoc() {
+      // Hide all 'doc' elements
+      for (let i = 0; i < totalDocs; i++) {
+        document.getElementById(`doc${i}`).style.display = 'none';
+      }
+
+      // Display the current 'doc' element
+      document.getElementById(`doc${currentIndex}`).style.display = 'block';
+
+      // Increment the index for the next 'doc'
+      currentIndex = (currentIndex + 1) % totalDocs;
+    }
+
+    // Call the displayNextDoc function every 2 seconds
+    setInterval(displayNextDoc, 2000);
+
+    // Function to change the displayed 'doc' based on the selected option
+    function changeDoc() {
+      const dropdown = document.getElementById("docDropdown");
+      const selectedIndex = dropdown.selectedIndex;
+      currentIndex = selectedIndex;
+      displayNextDoc();
+    }
+  </script>
+
+<!-- Include the footer partial -->
+<div><%- include("partials/footer.ejs") %></div>

@@ -1,0 +1,128 @@
+@font-face {
+  font-family: "docWho";
+  src: url("../fonts/DoctorWhat.ttf");
+}
+
+body {
+  position: relative;
+  background-color: #010309;
+  height: 100vh;
+  font-family: "Gill Sans", sans-serif;
+  color: #fff;
+  text-align: center;
+  /* cursor: none; */
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: url("/images/tardisInCorner.jpg");
+  background-size: cover;
+  background-position: right bottom;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  animation: fadeBackground 13.5s infinite;
+  z-index: -1;
+}
+
+@keyframes fadeBackground {
+  0% {
+    opacity: 0;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.title {
+  display: flex;
+  font-family: "docWho";
+  color: #fff;
+  align-items: flex-end;
+  justify-content: center;
+  margin: 3rem 0;
+  padding: 0;
+}
+
+.title h1 {
+  font-size: 4rem;
+  margin: .2rem;
+}
+
+.title h3 {
+  font-size: 2rem;
+  font-family: "Gill Sans", sans-serif;
+  margin: .2rem;
+}
+
+.fade {
+  transition: opacity 1s;
+  opacity: 0;
+}
+
+.fade.show {
+  opacity: 1;
+}
+
+#custom-cursor {
+  position: absolute;
+  width: 2rem;
+  height: 5rem;
+  background-image: url("/images/tardisWindowGlow-removebg.png");
+  background-size: cover;
+  pointer-events: none;
+  transform-origin: center center;
+  animation: spinCursor 2s infinite linear;
+}
+
+@keyframes spinCursor {
+  0% {
+    transform: translateX(-50%) translateY(-50%) rotate(0deg);
+  }
+  100% {
+    transform: translateX(-50%) translateY(-50%) rotate(360deg);
+  }
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  font-size: 1.5rem;
+  font-family: "Gill Sans", sans-serif;
+  color: #fff;
+}
+
+footer a {
+  color: #203593;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #203593;
+}
+
+.footer-right {
+  display: flex;
+  align-items: right;
+}
+
+.footer-left {
+  display: flex;
+  align-items: left;
+}
+
+.actor-img {
+  height: 25rem;
+}

@@ -1,0 +1,12 @@
+<!-- Include the header partial -->
+<%- include("partials/header.ejs") %>
+
+<h1>Doctor Who Selected: <%= doctor %></h1>
+
+<h2>Companions</h2>
+<% data.forEach(function(companion, index){ %>
+<h1><%= companion.companion_name %></h1>
+<% }) %>
+
+<!-- Include the footer partial -->
+<div><%- include("partials/footer.ejs") %></div>
