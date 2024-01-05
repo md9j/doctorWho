@@ -1,22 +1,22 @@
 <!-- Include the header partial -->
 <%- include("partials/header.ejs") %>
 
-  <span class="title"><h1>Doctor Who</h1><h3 class="title-sm">(dabase)</h3></span>
-
+<div class="banner">
   <!-- list out each incarnation from the doctor_who database response -->
-  <% data.rows.forEach(function(doc, index){ %>
+  <% data1.rows.forEach(function(doc, index){ %>
     <h2 id="doc<%= index %>" style="display: none;"><%= doc.actor_name %>, the <%= doc.incarnation %></h2>
     <!-- add area for image of each doctor, add new table to db -->
   <% }) %>
 
   <img src="images/actors/12thDoctorTestImage.jpg" class="actor-img"  alt=", the ">
+</div>
 
   <p>Information available is pre-60th-anniversary specials.<br>Updates to occur futher into your linear future</p>
 
   <!-- dropdown with each doc.incarnation as a selectable option -->
   <form action="/doctorInfo" method="post">
     <select id="docDropdown" name="selectedDoctor" onchange="changeDoc()">
-      <% data.rows.forEach(function(doc, index){ %>
+      <% data1.rows.forEach(function(doc, index){ %>
         <option value="<%= doc.doctor_id %>"><%= doc.incarnation %>, <%= doc.actor_name %></option>
       <% }) %>
     </select>
@@ -28,7 +28,7 @@
 
   <script>
     // Get the total number of 'doc' elements
-    var totalDocs = <%= data.rows.length %>;
+    var totalDocs = <%= data1.rows.length %>;
 
 
     // Set the initial index to 0
