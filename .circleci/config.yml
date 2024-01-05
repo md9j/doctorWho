@@ -46,7 +46,7 @@ jobs:
 #             ssh -o StrictHostKeyChecking=no root@45.79.109.251 'bash /tmp/deployPortfolio.sh'
 
 workflows:
-  update_portfolio:
+  update_whodabase:
     jobs:
       - build_and_test
 #       - build_docker_image:
