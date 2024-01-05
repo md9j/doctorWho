@@ -1,12 +1,28 @@
 <!-- Include the header partial -->
 <%- include("partials/header.ejs") %>
 
-<h1>Doctor Who Selected: <%= doctor %></h1>
+<h2><%= doctor.incarnation %></h2>
+<h1><%= doctor.actor_name %></h1>
 
-<h2>Companions</h2>
-<% data.forEach(function(companion, index){ %>
-<h1><%= companion.companion_name %></h1>
-<% }) %>
+
+<div class="details-box">
+  <div class="detail-column">
+    <h2>Companions (<%= data1.length %>)</h2>
+
+      <% data1.forEach(function(companion, index){ %>
+        <li class="detail actor"><%= companion.companion_name %></li>
+        <span class="tooltip">Actor Details</span>
+      <% }) %>
+  </div>
+
+  <div class="detail-column">
+    <h2>Episodes (<%= data2.length %>)</h2>
+
+    <% data2.forEach(function(episode, index){ %>
+      <li class="detail"> <%= episode.title %> </li>
+      <% }) %>
+  </div>
+</div>
 
 <!-- Include the footer partial -->
 <div><%- include("partials/footer.ejs") %></div>
