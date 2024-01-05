@@ -29,20 +29,27 @@ app.listen(port, () => {
   console.log(`It's me, port ${port}, I'm the listening port it's me`);
 });
 
+async function getDoctors() {
+  return await db.query("SELECT d.incarnation, d.id AS doctor_id, a.name AS actor_name FROM doctors d INNER JOIN actors a ON d.primary_actor = a.id");
+}
+
 // home route with doctors query for display and user selection
 app.get("/", async (req, res) => {
-  doctors = await db.query("SELECT d.incarnation, d.id AS doctor_id, a.name AS actor_name FROM doctors d INNER JOIN actors a ON d.primary_actor = a.id");
+  doctors = await getDoctors();
   console.log(doctors.rows);
-  res.render("docWho.ejs", {data: doctors});
+  res.render("docWho.ejs", {data1: doctors});
 });
 
 // get selected doctor info from database
 app.post("/doctorInfo", async (req, res) => {
   const selectedDoctor = req.body.selectedDoctor;
   console.log(`Selected Doctor: ${selectedDoctor}`); // Log the selected doctor's value
+  doctors = await getDoctors();
+  const selectedDoctorRecord = doctors.rows.find(doctor => doctor.doctor_id == selectedDoctor);
+    console.log(selectedDoctorRecord); // Log the selected doctor's record
 
     try {
-      const doctorInfo = await db.query(`
+      const doctorInfoCompanion = await db.query(`
       SELECT DISTINCT c.name AS companion_name
       FROM public.companions c
       JOIN public.serials_companions sc ON c.id = sc.companion_id
@@ -50,11 +57,15 @@ app.post("/doctorInfo", async (req, res) => {
       JOIN public.serials_doctors sd ON s.id = sd.serial_id
       WHERE sd.doctor_id = $1`, [selectedDoctor]);
       
-      console.log(doctorInfo.rows); // Log the doctorInfo rows
-      // const companions = doctorInfo.rows.map(row => row.companion_name);
+      console.log(doctorInfoCompanion.rows); // Log the companions
 
-      // console.log("Companions: " + companions);
-      res.render("doctorInfoOverview.ejs", {data: doctorInfo.rows, doctor: selectedDoctor});
+      const doctorInfoSerials = await db.query(`
+      SELECT s.title FROM serials s JOIN serials_doctors sd ON s.id = sd.serial_id WHERE sd.doctor_id = $1`, [selectedDoctor]);
+
+      console.log(doctorInfoSerials.rows); // Log the serials
+
+      res.render("doctorInfoOverview.ejs", {data1: doctorInfoCompanion.rows, data2: doctorInfoSerials.rows, doctor: selectedDoctorRecord});
+
     } catch (error) {
       console.error(error);
       res.status(500).send("Internal Server Error");
