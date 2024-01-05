@@ -25,16 +25,26 @@ body::before {
   background-position: right bottom;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  animation: fadeBackground 13.5s infinite;
+  animation: fadeBackground 12.5s infinite;
   z-index: -1;
 }
 
+/* blinking TARDIS */
 @keyframes fadeBackground {
   0% {
     opacity: 0;
   }
+  30% {
+    opacity: 1;
+  }
+  45% {
+    opacity: .1;
+  }
   70% {
     opacity: 1;
+  }
+  90% {
+    opacity: 0;
   }
   100% {
     opacity: 0;
@@ -71,6 +81,18 @@ body::before {
   opacity: 1;
 }
 
+.banner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem;
+  padding: 2rem;
+  border: 1px solid #fff;
+  border-radius: 1rem;
+  background-color: rgba(0, 0, 0, .5);
+}
+
 #custom-cursor {
   position: absolute;
   width: 2rem;
@@ -91,13 +113,96 @@ body::before {
   }
 }
 
-footer {
+
+.actor-img {
+  height: 25rem;
+}
+
+.details-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: top;
+  margin: 2rem;
+}
+
+.detail-column {
+  display: flex;
+  flex-direction: column;
+  float: left;
+  align-content: flex-start;
+  text-align: left;
+  margin: 2rem;
+}
+
+.detail {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  list-style-type: none;
+  margin: .25rem;
+}
+
+.actor {
+  position: relative;
+  display: inline-block;
+  color: pink;
+}
+
+.tooltip {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+
+  /* Position the tooltip */
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px;
+
+  /* Fade in tooltip */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.actor:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* header */
+
+nav {
+  position: fixed;
+  top: 0;
+  width: 96%;
   padding: 1rem;
   font-size: 1.5rem;
+  font-family: "Gill Sans", sans-serif;
+  color: #fff;
+  padding: 1rem;
+}
+
+.logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* footer */
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding-top: 1rem;
+  font-size: .75rem;
   font-family: "Gill Sans", sans-serif;
   color: #fff;
 }
@@ -116,13 +221,11 @@ footer a {
 .footer-right {
   display: flex;
   align-items: right;
+  padding-right: 1rem;
 }
 
 .footer-left {
   display: flex;
   align-items: left;
-}
-
-.actor-img {
-  height: 25rem;
+  padding-left: 1rem;
 }
