@@ -1,31 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<!-- required meta tags -->
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		
+		<!-- custom css -->
 		<link rel="stylesheet" href="./styles/docWho.css" />
+
 		<title>DoctorWhoDabase</title>
 	</head>
 
-	<header>
-		<nav>
-			<div class="logo">
-				<a href="/">
-					<span class="title"><h1>Doctor Who</h1><h3 class="title-sm">(dabase)</h3></span>
-				</a>
-			</div>
-			<div class="dropdown">
-				<button class="dropbtn">Explore</button>
-				<div class="dropdown-content">
-					<a href="#">Doctors</a>
-					<a href="#">Companions</a>
-					<a href="#">TARDISs</a>
-					<a href="#">Villians</a>
-					<a href="#">... and then?</a>
+	<nav>
+		<div class="header-logo-image">
+			<a href="/">
+				<!-- <img src="" alt="Doctor Whodabase Logo"> -->
+				<p class="header-logo">
+					<span class="logo-text">Doctor Who</span>
+					<span class="logo-text-sm">dabase</span>
+				</p>
+			</a>
+		</div>
+		<div class="navbar">
+				<div class="menu">
+						<a href="/">Home</a>
+						<a href="/#about" class="disabled">About</a>
+						<a id="open-modal-btn" class="disabled">Contact</a>
 				</div>
-			</div>
-		</nav>
-	</header>
-
+				<div class="toggle-button">
+						<span></span>
+						<span></span>
+						<span></span>
+				</div>
+		</div>
+	</nav>
+	
+	
 	<body>
 		<main>
