@@ -1,17 +1,24 @@
 <!-- Include the header partial -->
 <%- include("partials/header.ejs") %>
 
-<div class="banner">
-  <!-- list out each incarnation from the doctor_who database response -->
-  <% data1.rows.forEach(function(doc, index){ %>
-    <h2 id="doc<%= index %>" style="display: none;"><%= doc.actor_name %>, the <%= doc.incarnation %></h2>
-    <!-- add area for image of each doctor, add new table to db -->
-  <% }) %>
+<div class="container">
+  <div class="banner-container">
+    <div class="banner">
+      <div class="banner-text">
+        <!-- list out each incarnation from the doctor_who database response -->
+        <% data1.rows.forEach(function(doc, index){ %>
+          <h2 id="doc<%= index %>" style="display: none;"><%= doc.actor_name %>, the <%= doc.incarnation %></h2>
+          <!-- add area for image of each doctor, add new table to db -->
+        <% }) %>
+      </div>
 
-  <img src="images/actors/12thDoctorTestImage.jpg" class="actor-img"  alt=", the ">
+      <img src="images/actors/12thDoctorTestImage.jpg" class="actor-img"  alt=", the ">
+    </div>
+  </div>
 </div>
 
-  <p>Information available is pre-60th-anniversary specials.<br>Updates to occur futher into your linear future</p>
+<div class="search-box">
+  <p>Information available is pre-60th-anniversary specials.<br>Updates to occur futher to the right within your linear timeline.</p>
 
   <!-- dropdown with each doc.incarnation as a selectable option -->
   <form action="/doctorInfo" method="post">
@@ -22,11 +29,12 @@
     </select>
     <button type="submit">Search</button>
   </form>
-
+</div>
 
 <!-- scripts -->
 
   <script>
+
     // Get the total number of 'doc' elements
     var totalDocs = <%= data1.rows.length %>;
 
