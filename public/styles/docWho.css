@@ -51,26 +51,6 @@ body::before {
   }
 }
 
-.title {
-  display: flex;
-  font-family: "docWho";
-  color: #fff;
-  align-items: flex-end;
-  justify-content: center;
-  margin: 3rem 0;
-  padding: 0;
-}
-
-.title h1 {
-  font-size: 4rem;
-  margin: .2rem;
-}
-
-.title h3 {
-  font-size: 2rem;
-  font-family: "Gill Sans", sans-serif;
-  margin: .2rem;
-}
 
 .fade {
   transition: opacity 1s;
@@ -81,42 +61,49 @@ body::before {
   opacity: 1;
 }
 
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  margin-top: 5%;
+}
+
+.banner-container {
+  width: 30%;
+  box-sizing: border-box;
+  margin: 0 2%;
+}
+
 .banner {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 2rem;
-  padding: 2rem;
+  margin: 10% 0;
+  padding: 0 2rem 1rem;
   border: 1px solid #fff;
   border-radius: 1rem;
   background-color: rgba(0, 0, 0, .5);
+  box-sizing: border-box;
 }
 
-#custom-cursor {
-  position: absolute;
-  width: 2rem;
-  height: 5rem;
-  background-image: url("/images/tardisWindowGlow-removebg.png");
-  background-size: cover;
-  pointer-events: none;
-  transform-origin: center center;
-  animation: spinCursor 2s infinite linear;
+.banner-text {
+  height: 20%;
+  color: #fff;
+  text-align: center;
+  box-sizing: border-box;
 }
-
-@keyframes spinCursor {
-  0% {
-    transform: translateX(-50%) translateY(-50%) rotate(0deg);
-  }
-  100% {
-    transform: translateX(-50%) translateY(-50%) rotate(360deg);
-  }
-}
-
 
 .actor-img {
-  height: 25rem;
+  max-width: 95%;
+  max-height: 60%;
+  box-sizing: border-box;
 }
+
+.actor-img.initial-width {
+  width: 95%;
+} 
 
 .details-box {
   display: flex;
@@ -150,54 +137,124 @@ body::before {
   color: pink;
 }
 
-.tooltip {
-  visibility: hidden;
-  width: 120px;
-  background-color: #555;
-  color: #fff;
-  text-align: center;
-  padding: 5px 0;
-  border-radius: 6px;
-
-  /* Position the tooltip */
-  position: absolute;
-  z-index: 1;
-  bottom: 100%;
-  left: 50%;
-  margin-left: -60px;
-
-  /* Fade in tooltip */
-  opacity: 0;
-  transition: opacity 0.3s;
+a { 
+  text-decoration: none 
 }
 
-.actor:hover .tooltip {
-  visibility: visible;
-  opacity: 1;
+.disabled {
+  pointer-events: none;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
 /* header */
-
 nav {
-  position: fixed;
-  top: 0;
-  width: 96%;
-  padding: 1rem;
-  font-size: 1.5rem;
-  font-family: "Gill Sans", sans-serif;
+  font-family: 'Hanken Grotesk', sans-serif;
+  background-color: none;
   color: #fff;
-  padding: 1rem;
+  width: 100%;
+  max-height: 10%;
+  align-content: center;
+  z-index: 1;
 }
 
-.logo {
-  position: absolute;
-  top: 0;
-  left: 0;
+.navbar {
+  margin: 1rem 2rem 0 auto;
+  text-align: right;
+  justify-content: flex-end;
+  align-content: center;
+  width: 40%;
+  background-color: none;
+}
+
+.header-logo {
+  text-decoration: none;
+  color: #fff;
+}
+
+.logo-text {
+  font-family: docWho;
+  text-decoration: none;
+  color: #fff;
+  font-size: 3rem;
+
+}
+
+.logo-text-sm {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  text-decoration: none;
+  color: #fff;
+  font-size: 1.3rem;
+}
+
+.header-logo-image {
+  position: fixed;
+  float: left;
+  margin-left: 1%;
+  margin-top: 1%;
+  height: 60px;
+}
+
+.header-logo-image img {
+  height: 100%;
+  justify-content: center;
+  align-content: center;
+}
+
+.header-logo-image a {
+  background-color: none;
+}
+
+.menu {
+  display: flex;
+}
+
+.menu a {
+  text-decoration: none;
+  color: #fff;
+  width: 95%;
+}
+
+.toggle-button {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.toggle-button span {
+  height: 3px;
+  width: 25px;
+  background-color: #fff;
+  margin: 3px 0;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .menu {
+      display: none;
+      flex-direction: column;
+      background-color: none;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      z-index: 1;
+  }
+
+  .menu.active {
+      display: flex;
+  }
 }
 
 /* footer */
 
 footer {
+  background: transparent;
   position: fixed;
   bottom: 0;
   width: 100%;
