@@ -1,0 +1,17 @@
+name: Trigger CircleCI on package update
+
+on: 
+  package
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Trigger CircleCI pipeline
+      run: |
+        curl -u ${CIRCLECI_API_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
+          "branch": "main"
+        }' https://circleci.com/api/v2/project/gh/${GITHUB_REPOSITORY}/pipeline
+      env:
+        CIRCLECI_API_TOKEN: ${{ secrets.CIRCLECI_API_TOKEN }}
