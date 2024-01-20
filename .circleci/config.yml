@@ -11,50 +11,31 @@ jobs:
           command: |
             npm install --save
 
-#   build_docker_image:
-#     docker:
-#       - image: cimg/node:12.18.3
-#     steps:
-#       - checkout
-#       - setup_remote_docker:
-#           docker_layer_caching: true
-#       - run:
-#           name: Build Docker Image
-#           command: |
-#             docker build -t ghcr.io/NAMESPACE/IMAGE_NAME:2.0.0 -t ghcr.io/NAMESPACE/IMAGE_NAME:latest .
-#             echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
-#             docker push ghcr.io/NAMESPACE/IMAGE_NAME:2.0.0
-#             docker push ghcr.io/NAMESPACE/IMAGE_NAME:latest
-
-# # changed permissions on script         
-#   deploy:
-#     docker:
-#       - image: cimg/python:3.8
-#     steps:
-#       - checkout
-#       - run:
-#           name: Add Linode VPS host key to known_hosts
-#           command: |
-#             ssh-keyscan -H 45.79.109.251 >> ~/.ssh/known_hosts
-#       - add_ssh_keys:
-#           fingerprints:
-#           - $NEW_SSH_CCI_LINODE
-#       - run:
-#           name: Deploy to Linode VPS
-#           command: |
-#             scp -o StrictHostKeyChecking=no ./deployPortfolio.sh root@45.79.109.251:/tmp/
-#             ssh -o StrictHostKeyChecking=no root@45.79.109.251 'bash /tmp/deployPortfolio.sh'
+  image_deployment_script:
+    docker:
+      - image: cimg/python:3.8
+    steps:
+      - checkout
+      - run:
+          name: Add Linode VPS host key to known_hosts
+          command: |
+            ssh-keyscan -H 45.79.115.237 >> ~/.ssh/known_hosts
+      - add_ssh_keys:
+          fingerprints:
+          - $NEW_SSH_CCI_LINODE
+      - run:
+          name: Deploy to Linode VPS
+          command: |
+            scp -o StrictHostKeyChecking=no ./deployWhodabase.sh root@45.79.115.237:/tmp/
+            ssh -o StrictHostKeyChecking=no root@45.79.115.237 'bash /tmp/deployWhodabase.sh'
 
 workflows:
   update_whodabase:
     jobs:
       - build_and_test
-#       - build_docker_image:
-#           requires:
-#             - build_and_test
-#           filters:
-#             branches:
-#               only: deploy_live
-#       - deploy:
-#           requires:
-#             - build_docker_image
+      - image_deployment_script:
+          requires:
+            - build_and_test
+          filters:
+            branches:
+              only: deploy_live
