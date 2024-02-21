@@ -50,7 +50,7 @@ app.post("/doctorInfo", async (req, res) => {
 
     try {
       const doctorInfoCompanion = await db.query(`
-      SELECT DISTINCT c.name AS companion_name
+      SELECT DISTINCT c.name AS companion_name, c.actor AS companion_actor
       FROM public.companions c
       JOIN public.serials_companions sc ON c.id = sc.companion_id
       JOIN public.serials s ON sc.serial_id = s.id
