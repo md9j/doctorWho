@@ -10,8 +10,7 @@
     <h2>Companions (<%= data1.length %>)</h2>
 
       <% data1.forEach(function(companion, index){ %>
-        <li class="detail actor"><%= companion.companion_name %></li>
-        <span class="tooltip">Actor Details</span>
+        <li class="detail actor" value="<%= companion.companion_actor %>"><%= companion.companion_name %></li>
       <% }) %>
   </div>
 
