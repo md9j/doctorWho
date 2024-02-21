@@ -7,7 +7,7 @@
       <div class="banner-text">
         <!-- list out each incarnation from the doctor_who database response -->
         <% data1.rows.forEach(function(doc, index){ %>
-          <h2 id="doc<%= index %>" style="display: none;"><%= doc.actor_name %>, the <%= doc.incarnation %></h2>
+          <h2 id="doc<%= index %>" style="display: none;"><%= doc.actor_name %>,<br> the <%= doc.incarnation %></h2>
           <!-- add area for image of each doctor, add new table to db -->
         <% }) %>
       </div>
